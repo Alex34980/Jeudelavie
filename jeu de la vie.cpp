@@ -28,7 +28,7 @@ void preCellules(unsigned int, unsigned int, bool**);
 bool** manuelGrille(bool*, unsigned int*, unsigned int*);
 
 short unsigned int voisinscellule_ile (unsigned int x, unsigned int y, unsigned int X, unsigned int Y, bool** grille){// Détermine le nombre de cellules vivantes en son voisinage en île
-	bool gauche = true, bas = true, droite = true, haut = true; short unsigned int a = 0;//Ces booléens servent à empécher les erreurs de limites de grille
+	bool gauche = true, bas = true, droite = true, haut = true; short unsigned int a = 0;//Ces booléens servent à empêcher les erreurs de limites de grille
 	if (x == 0)
 		gauche = false;
 	if (y == 0)
@@ -63,7 +63,7 @@ short unsigned int voisinscellule_tore (unsigned int x, unsigned int y, unsigned
 	for (short int i = -1; i <= 1; i++)
 		for (short int ii = -1; ii <= 1; ii++)
 			if (i != 0 || ii != 0)
-				a += grille[(y + Y + ii)% Y][(x + X + i)% X];// Ajout de X et Y pour éviter (0-1)
+				a += grille[(y + Y + ii)% Y][(x + X + i)% X];// Ajout de X et Y pour éviter (0 - 1)
 	return a;
 }
 
@@ -196,7 +196,7 @@ void manuelCellule(unsigned int X, unsigned int Y, bool** grille){// Change une 
 	unsigned int x, y; char choix;
 	apercuGrille(X, Y, grille);
 	do{
-		std::cout << "Donner deux entier naturels x et y dont le max de X est " << X-1 << ", pour Y " << Y-1 << std::endl;
+		std::cout << "Donner deux entiers naturels x et y dont le max de X est " << X-1 << ", pour Y " << Y-1 << std::endl;
 		std::cin >> x >> y;
 		if (x < X && y < Y)
 			grille[y][x] = !(grille[y][x]);
@@ -229,9 +229,9 @@ void preCellules(unsigned int X, unsigned int Y, bool** grille){// L'aléatoire 
 		}
 }
 
-bool** manuelGrille(bool* mode_tore, unsigned int* X, unsigned int* Y){// Permet de créer une grille de n'importe quel taille
+bool** manuelGrille(bool* mode_tore, unsigned int* X, unsigned int* Y){// Permet de créer une grille de n'importe quelle taille
 	bool** grille;
-	std::cout << "Donner deux entier naturels X et Y pour la taille de la grille" << std::endl;
+	std::cout << "Donner deux entiers naturels X et Y pour la taille de la grille" << std::endl;
 	std::cin >> *X >> *Y;
 	grille = initialisationGrille(*X, *Y);
 	std::cout << "Répondez par: 0 -> Mode île, 1 -> Mode tore" << std::endl;
@@ -247,7 +247,7 @@ int main(){
 		bool** grille = manuelGrille(&mode_tore, &X, &Y);
 		if (X > 0 && Y > 0){
 			do{
-				std::cout << "Validez: 'P' -> Prédispositions, si non -> Disposition manuel. ('p' -> Prédispositions puis disposition manuel)" << std::endl;
+				std::cout << "Validez: 'P' -> Prédispositions, si non -> Disposition manuelle. ('p' -> Prédispositions puis disposition manuelle)" << std::endl;
 				std::cin >> choix;
 				if (choix == 'p' || choix == 'P')
 					preCellules(X, Y, grille);
